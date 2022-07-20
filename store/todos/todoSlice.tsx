@@ -1,4 +1,5 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {TodosType, TodoType} from "../../types/TodoTypes";
 
 // export const fetchLoginData = createAsyncThunk('login/fetchLogin',
 //     async ({params,userType}, { dispatch }) => {
@@ -6,21 +7,25 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 //     }
 // )
 
-export interface Todo {
-    id: number,
-    text:string,
+const initialTodoState:TodosType = {
+    todos:[],
+    todo:{
+        id:0,
+        text:"",
+        completed:false
+    }
 }
 
 const todoSlice = createSlice({
     name: 'todo',
-    initialState: {
-        todo: {},
-        todos: [],
-    },
+    initialState: initialTodoState,
     reducers: {
-        setTodos(state, action:PayloadAction<Todo>) {
-            state.todos = [action.payload,...state.todos]
+        setTodos: function (state, action: PayloadAction<TodoType>) {
+            state.todos = [action.payload, ...state.todos]
         },
+        updateTodo: function (state,action:PayloadAction<TodoType[]>){
+            state.todos = action.payload
+        }
     },
     // extraReducers: (builder) => {
     //     builder.addCase(fetchLoginData.fulfilled, (state, action) => {

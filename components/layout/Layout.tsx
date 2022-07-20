@@ -1,15 +1,22 @@
 import React from 'react';
-import {ScrollView,View} from "react-native";
+import {Keyboard, ScrollView, TouchableWithoutFeedback, View} from "react-native";
 import Header from '../header/Header';
 
-const Layout: React.FC = ({children,navigation}) => {
+interface LayoutProps {
+    children:React.ReactNode,
+    backIcon:boolean | undefined,
+}
+
+const Layout: React.FC<LayoutProps> = props => {
     return (
-        <>
-            <Header navigation={navigation} />
-            <ScrollView contentContainerStyle={{flex:1,padding:20}}>
-                {children}
-            </ScrollView>
-        </>
+        <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
+            <View style={{flex:1,backgroundColor:'#fff'}}>
+                <Header backIcon={props.backIcon} />
+                <ScrollView contentContainerStyle={{flex:1,margin:20,}}>
+                    {props.children}
+                </ScrollView>
+            </View>
+        </TouchableWithoutFeedback>
     );
 }
 

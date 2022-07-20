@@ -1,11 +1,31 @@
 import {configureFonts, DefaultTheme, DarkTheme as PaperDarkTheme} from "react-native-paper";
 
-const fonts = {
+interface font {
+    fontFamily:string,
+    fontWeight:undefined | string
+}
+
+interface Fonts {
+    regular: font,
+    medium: font,
+    light:font,
+    thin:font
+}
+
+const fonts: Fonts = {
     regular: {
         fontFamily: 'redhat-regular',
         fontWeight: 'normal',
     },
     medium: {
+        fontFamily: 'redhat-black',
+        fontWeight: 'normal',
+    },
+    light: {
+        fontFamily: 'redhat-black',
+        fontWeight: 'normal',
+    },
+    thin: {
         fontFamily: 'redhat-black',
         fontWeight: 'normal',
     },
@@ -19,15 +39,14 @@ const font = {
 
 const theme = {
     ...DefaultTheme,
-    version:3,
-    dark:true,
-    colors:{
+    version: 3,
+    dark: true,
+    colors: {
         ...DefaultTheme.colors,
-        primary:'#17C3B2',
-        // secondary:'#17C3B2'
+        primary: '#17C3B2',
     },
     fonts: configureFonts(font),
-}
+};
 
 const darkTheme = {
     ...PaperDarkTheme,
