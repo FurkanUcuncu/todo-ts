@@ -2,19 +2,19 @@ import React from 'react';
 import {Keyboard, ScrollView, TouchableWithoutFeedback, View} from "react-native";
 import Header from '../header/Header';
 
-interface LayoutProps {
+interface ILayoutProps {
     children:React.ReactNode,
-    backIcon:boolean | undefined,
+    backIcon?:boolean | undefined,
 }
 
-const Layout: React.FC<LayoutProps> = props => {
+const Layout: React.FC<ILayoutProps> = props => {
     return (
         <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
             <View style={{flex:1,backgroundColor:'#fff'}}>
                 <Header backIcon={props.backIcon} />
-                <ScrollView contentContainerStyle={{flex:1,margin:20,}}>
+                <View style={{flex:1,margin:20,}}>
                     {props.children}
-                </ScrollView>
+                </View>
             </View>
         </TouchableWithoutFeedback>
     );

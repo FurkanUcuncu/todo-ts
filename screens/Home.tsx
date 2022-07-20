@@ -20,7 +20,7 @@ const Home: React.FC<HomeScreen> = props => {
         setText('')
     }
     return (
-        <Layout backIcon={false}>
+        <Layout>
             <View style={{flex:1}}>
                 <TextInput
                     style={{backgroundColor:'#fff'}}

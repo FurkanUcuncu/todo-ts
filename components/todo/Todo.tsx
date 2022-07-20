@@ -1,30 +1,46 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity} from "react-native";
+import {View, StyleSheet, TouchableOpacity, Animated} from "react-native";
 import {Checkbox, useTheme} from 'react-native-paper';
+import { TodoType } from '../../types/TodoTypes';
 
-interface Props{
+interface IProps{
     id:number,
     text:string,
     completed:boolean,
-    handleEditTodo:()=>void
+    handleEditTodo: () => void,
+    removeTodo: (rowMap: TodoType, id: number) => void,
+    rowHeightAnimatedValue: any
 }
 
-const Todo:React.FC<Props> = props => {
-    const {colors} = useTheme()
+const Todo:React.FC<IProps> = props => {
+    const { colors } = useTheme()
 
     return (
-        <View style={styles.row}>
+        <Animated.View style={[styles.rowFront,{height: props.rowHeightAnimatedValue}]}>
             <TouchableOpacity onPress={props.handleEditTodo}>
                 <Checkbox.Item position="leading" color={colors.primary} labelStyle={{width:'100%', textAlign:'left',textDecorationLine: props.completed ? 'line-through' : 'none'}} label={props.text} status={props.completed ? "checked" : "unchecked"} />
             </TouchableOpacity>
-        </View>
+        </Animated.View>
     );
 }
 
 const styles = StyleSheet.create({
-    row:{
-        flexDirection: 'row',
-    }
-})
+    row: {
+        // flexDirection:'row'
+    },
+    rowFront: {
+        justifyContent:'center',
+        backgroundColor: '#FFF',
+        borderRadius: 5,
+        height: 60,
+        margin: 5,
+        marginBottom: 15,
+        shadowColor: '#999',
+        shadowOffset: {width: 0, height: 1},
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        elevation: 5,
+    },
+});
 
 export default Todo;
