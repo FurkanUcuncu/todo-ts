@@ -1,9 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, TouchableOpacity} from "react-native";
-import {Button, Checkbox, useTheme} from 'react-native-paper';
-import {TodoType} from "../../types/TodoTypes";
-import {useAppDispatch, useAppSelector} from "../../hooks/redux-hooks";
-import {todoActions} from "../../store/todos/todoSlice";
+import {Checkbox, useTheme} from 'react-native-paper';
 
 interface Props{
     id:number,
@@ -14,8 +11,6 @@ interface Props{
 
 const Todo:React.FC<Props> = props => {
     const {colors} = useTheme()
-    const dispatch = useAppDispatch()
-    const {todos} = useAppSelector(state=>state?.todo)
 
     return (
         <View style={styles.row}>
@@ -28,7 +23,7 @@ const Todo:React.FC<Props> = props => {
 
 const styles = StyleSheet.create({
     row:{
-        flexDirection:'row'
+        flexDirection: 'row',
     }
 })
 

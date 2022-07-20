@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import {View, Text} from "react-native";
-import {Button, TextInput} from 'react-native-paper';
+import {View} from "react-native";
+import {TextInput} from 'react-native-paper';
 import {todoActions} from '../store/todos/todoSlice';
 import {useAppDispatch, useAppSelector} from "../hooks/redux-hooks";
 import {HomeScreen} from "../routes/StackNavigator";
 import Layout from "../components/layout/Layout";
-import Todo from '../components/todo/Todo';
 import {TodoType} from "../types/TodoTypes";
+import TodoList from '../components/todo/TodoList';
 
 const Home: React.FC<HomeScreen> = props => {
     const dispatch = useAppDispatch()
@@ -25,24 +25,14 @@ const Home: React.FC<HomeScreen> = props => {
                 <TextInput
                     style={{backgroundColor:'#fff'}}
                     mode="outlined"
-                    label="Email"
+                    label="Type a to do"
                     value={text}
                     onChangeText={text => setText(text)}
                     onSubmitEditing={handleAddTodo}
                 />
-                {
-                    todos.map((todo:TodoType) => {
-                        return (
-                            <Todo
-                                key={todo.id}
-                                id={todo.id}
-                                text={todo.text}
-                                completed={todo.completed}
-                                handleEditTodo={()=>handleEditTodo(todo)}
-                            />
-                        )
-                    })
-                }
+                <TodoList
+                    handleEditTodo={handleEditTodo}
+                />
             </View>
         </Layout>
     );
