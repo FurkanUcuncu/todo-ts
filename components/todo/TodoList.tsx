@@ -1,37 +1,57 @@
 import React from 'react';
-import { StyleSheet,View,Text,Animated } from "react-native";
-import { useAppSelector } from '../../hooks/redux-hooks';
+import {StyleSheet, Animated, ScrollView} from "react-native";
+import {useAppDispatch, useAppSelector} from '../../hooks/redux-hooks';
 import { TodoType } from '../../types/TodoTypes';
 import Todo from './Todo';
 // import Animated, { Layout, LightSpeedInRight, LightSpeedOutRight } from 'react-native-reanimated'
 import { SwipeListView } from 'react-native-swipe-list-view';
 import TodoActions from './TodoActions';
+import {todoActions} from "../../store/todos/todoSlice";
 
 interface IProps {
     handleEditTodo:(todo:TodoType)=>void
 }
 
 const TodoList: React.FC<IProps> = props => {
+    const dispatch = useAppDispatch()
     const { todos } = useAppSelector(state => state?.todo)
 
-    const closeRow = (rowMap:TodoType[], rowKey:number) => {
-        // if (rowMap[rowKey]) {
-        //     rowMap[rowKey].closeRow();
-        // }
+    const closeRow = (rowMap:any, rowKey:number) => {
+        const currentIndex = todos.map((todo,index)=>todo.id === rowKey).indexOf(true)
+        console.log(rowMap["1"])
+        if (rowMap[currentIndex]) {
+            rowMap[rowKey].closeRow();
+        }
     };
 
-    const deleteRow = (rowMap, rowKey) => {
-        console.log(rowMap,rowKey)
+    const deleteRow = (rowMap:any, rowKey:number) => {
+        dispatch(todoActions.deleteTodo({id: rowKey}))
         closeRow(rowMap, rowKey);
-        // const newData = [...listData];
-        // const prevIndex = listData.findIndex(item => item.key === rowKey);
-        // newData.splice(prevIndex, 1);
-        // setListData(newData);
+    };
+
+    const onRowDidOpen = (rowKey:number) => {
+        console.log('This row opened', rowKey);
+    };
+
+    const onLeftActionStatusChange = (rowKey:number) => {
+        console.log('onLeftActionStatusChange', rowKey);
+    };
+
+    const onRightActionStatusChange = (rowKey:number) => {
+        console.log('onRightActionStatusChange', rowKey);
+    };
+
+    const onRightAction = (rowKey:number) => {
+        console.log('onRightAction', rowKey);
+    };
+
+    const onLeftAction = (rowKey:number) => {
+        console.log('onLeftAction', rowKey);
     };
 
     return (
         <Animated.View
-            style={{ marginTop: 20 }}
+            style={{ flex:1 }}
             // entering={LightSpeedInRight}
             // exiting={LightSpeedOutRight}
             // layout={Layout.springify()}
@@ -56,26 +76,45 @@ const TodoList: React.FC<IProps> = props => {
                     return (
                         <Todo
                             id={data.item.id}
+                            rowMap={rowMap}
                             text={data.item.text}
                             completed={data.item.completed}
                             handleEditTodo={() => props.handleEditTodo(data.item)}
                             removeTodo={() => deleteRow(rowMap, data.item.id)}
                             rowHeightAnimatedValue={rowHeightAnimatedValue}
+                            rightActionState={false}
                         />
                     )
                 }}
-                renderHiddenItem={(data, rowMap) => (
-                    <View style={styles.rowBack}>
-                        <Text>Left</Text>
-                        <Text>Right</Text>
-                    </View>
-                )}
-                rightOpenValue={-150}
+                renderHiddenItem={(data, rowMap) => {
+                    const rowActionAnimatedValue = new Animated.Value(75);
+                    const rowHeightAnimatedValue = new Animated.Value(60);
+                    return(
+                        <TodoActions
+                            data={data}
+                            rowMap={rowMap}
+                            rowActionAnimatedValue={rowActionAnimatedValue}
+                            rowHeightAnimatedValue={rowHeightAnimatedValue}
+                            onClose={() => closeRow(rowMap, data.item.id)}
+                            onDelete={() => deleteRow(rowMap, data.item.id)}
+                            leftActionActivated={false}
+                            rightActionActivated={false}
+                            swipeAnimatedValue={false}
+                        />
+                    )
+                }}
+                leftOpenValue={75}
+                rightOpenValue={-75}
                 disableRightSwipe
                 leftActivationValue={100}
                 rightActivationValue={-200}
                 leftActionValue={0}
+                onRowDidOpen={()=>onRowDidOpen(5)}
                 rightActionValue={-500}
+                // onLeftAction={onLeftAction}
+                onRightAction={()=>onRightAction(5)}
+                // onLeftActionStatusChange={onLeftActionStatusChange}
+                onRightActionStatusChange={()=>onRightActionStatusChange(5)}
             />
         </Animated.View>
     );

@@ -21,7 +21,10 @@ const Home: React.FC<HomeScreen> = props => {
     }
     return (
         <Layout>
-            <View style={{flex:1}}>
+            <View style={{flex:1,justifyContent:'space-between'}}>
+                <TodoList
+                    handleEditTodo={handleEditTodo}
+                />
                 <TextInput
                     style={{backgroundColor:'#fff'}}
                     mode="outlined"
@@ -29,9 +32,6 @@ const Home: React.FC<HomeScreen> = props => {
                     value={text}
                     onChangeText={text => setText(text)}
                     onSubmitEditing={handleAddTodo}
-                />
-                <TodoList
-                    handleEditTodo={handleEditTodo}
                 />
             </View>
         </Layout>

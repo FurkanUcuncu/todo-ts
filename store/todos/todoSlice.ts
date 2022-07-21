@@ -8,7 +8,11 @@ import {TodosType, TodoType} from "../../types/TodoTypes";
 // )
 
 const initialTodoState:TodosType = {
-    todos:[],
+    todos:[
+        {id:1,text:'imtodo',completed:false},
+        {id:2,text:'imtodo2',completed:false},
+        {id:3,text:'imtodo3',completed:false},
+    ],
     todo:{
         id:0,
         text:"",
@@ -25,6 +29,9 @@ const todoSlice = createSlice({
         },
         updateTodo: function (state,action:PayloadAction<TodoType[]>){
             state.todos = action.payload
+        },
+        deleteTodo:function(state,action:PayloadAction<{ id:number }>){
+            state.todos = state.todos.filter((todo:TodoType)=>todo.id !== action.payload.id )
         }
     },
     // extraReducers: (builder) => {

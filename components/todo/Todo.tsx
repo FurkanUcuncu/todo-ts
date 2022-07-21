@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, StyleSheet, TouchableOpacity, Animated} from "react-native";
 import {Checkbox, useTheme} from 'react-native-paper';
 import { TodoType } from '../../types/TodoTypes';
@@ -9,11 +9,23 @@ interface IProps{
     completed:boolean,
     handleEditTodo: () => void,
     removeTodo: (rowMap: TodoType, id: number) => void,
-    rowHeightAnimatedValue: any
+    rowMap:any,
+    rowHeightAnimatedValue: any,
+    rightActionState:any
 }
 
 const Todo:React.FC<IProps> = props => {
     const { colors } = useTheme()
+
+    if(props.rightActionState){
+        Animated.timing(props.rowHeightAnimatedValue, {
+            toValue: 0,
+            duration: 200,
+            useNativeDriver: false,
+        }).start(() => {
+            props.removeTodo(props.rowMap,props.id);
+        });
+    }
 
     return (
         <Animated.View style={[styles.rowFront,{height: props.rowHeightAnimatedValue}]}>
