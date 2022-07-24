@@ -20,7 +20,7 @@ const Home: React.FC<HomeScreen> = props => {
         setText('')
     }
     return (
-        <Layout>
+        <Layout headerText="Home">
             <View style={{flex:1,justifyContent:'space-between'}}>
                 <TodoList
                     handleEditTodo={handleEditTodo}

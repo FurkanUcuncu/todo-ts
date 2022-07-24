@@ -2,15 +2,15 @@ import React from 'react';
 import { Appbar } from 'react-native-paper';
 import {useNavigation} from "@react-navigation/native";
 
-interface Props {
-    backIcon:boolean | undefined
+interface IProps {
+    backIcon: boolean | undefined,
+    headerText:string
 }
 
-const Header: React.FC<Props> = ({backIcon}) => {
+const Header: React.FC<IProps> = ({backIcon,headerText}) => {
     const navigation = useNavigation()
     const _goBack = () => {
         navigation.goBack()
-    console.log(JSON.stringify(navigation) + "nav")
     };
     return (
         <Appbar.Header dark>
@@ -18,7 +18,7 @@ const Header: React.FC<Props> = ({backIcon}) => {
                 backIcon &&
                 <Appbar.BackAction onPress={_goBack} />
             }
-            <Appbar.Content title="Title" />
+            <Appbar.Content title={headerText} />
             <Appbar.Action icon="menu" onPress={()=>{}} />
         </Appbar.Header>
     );

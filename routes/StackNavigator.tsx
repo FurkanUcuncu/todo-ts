@@ -2,11 +2,12 @@ import {createNativeStackNavigator, NativeStackScreenProps} from "@react-navigat
 import Home from "../screens/Home";
 import {NavigatorScreenParams} from "@react-navigation/native";
 import Settings from "../screens/Settings";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 type RootStackParamList = {
     // Home: NavigatorScreenParams<StackParamList> ;
     Home: undefined ;
-    Settings: undefined ;
+    DrawerStack: undefined ;
 };
 
 const MainStack = createNativeStackNavigator<RootStackParamList>()
@@ -20,7 +21,17 @@ export const MainStackNavigator = () => {
             screenOptions={{headerShown:false}}
         >
             <MainStack.Screen name="Home" component={Home} />
-            <MainStack.Screen name="Settings" component={Settings} />
+            <MainStack.Screen options={{ headerShown: false }} name="DrawerStack" component={DrawerStack} />
         </MainStack.Navigator>
     )
+}
+
+const Drawer = createDrawerNavigator();
+
+const DrawerStack = () => {
+  return (
+      <Drawer.Navigator initialRouteName="Settings">
+        <Drawer.Screen name="Settings" component={Settings} />
+      </Drawer.Navigator>
+  );
 }

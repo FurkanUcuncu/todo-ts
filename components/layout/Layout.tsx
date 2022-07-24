@@ -4,14 +4,15 @@ import Header from '../header/Header';
 
 interface ILayoutProps {
     children:React.ReactNode,
-    backIcon?:boolean | undefined,
+    backIcon?: boolean | undefined,
+    headerText:string
 }
 
 const Layout: React.FC<ILayoutProps> = props => {
     return (
         <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
             <View style={{flex:1,backgroundColor:'#fff'}}>
-                <Header backIcon={props.backIcon} />
+                <Header headerText={props.headerText} backIcon={props.backIcon} />
                 <View style={{flex:1,margin:20,}}>
                     {props.children}
                 </View>
