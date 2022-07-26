@@ -1,9 +1,8 @@
 import React from 'react';
-import {StyleSheet, Animated, ScrollView} from "react-native";
+import {StyleSheet, Animated} from "react-native";
 import {useAppDispatch, useAppSelector} from '../../hooks/redux-hooks';
 import { TodoType } from '../../types/TodoTypes';
 import Todo from './Todo';
-// import Animated, { Layout, LightSpeedInRight, LightSpeedOutRight } from 'react-native-reanimated'
 import { SwipeListView } from 'react-native-swipe-list-view';
 import TodoActions from './TodoActions';
 import {todoActions} from "../../store/todos/todoSlice";
@@ -16,7 +15,7 @@ const TodoList: React.FC<IProps> = props => {
     const dispatch = useAppDispatch()
     const { todos } = useAppSelector(state => state?.todo)
 
-    const closeRow = (rowMap:any, rowKey:number) => {
+    const closeRow = (rowMap:any, rowKey:number)  => {
         const currentIndex = todos.map((todo,index)=>todo.id === rowKey).indexOf(true)
         console.log(rowMap["1"])
         if (rowMap[currentIndex]) {

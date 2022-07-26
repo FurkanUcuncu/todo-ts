@@ -1,10 +1,10 @@
 import React from 'react';
 import { Appbar } from 'react-native-paper';
-import {useNavigation} from "@react-navigation/native";
+import {DrawerActions, useNavigation} from "@react-navigation/native";
 
 interface IProps {
     backIcon: boolean | undefined,
-    headerText:string
+    headerText:string,
 }
 
 const Header: React.FC<IProps> = ({backIcon,headerText}) => {
@@ -19,7 +19,7 @@ const Header: React.FC<IProps> = ({backIcon,headerText}) => {
                 <Appbar.BackAction onPress={_goBack} />
             }
             <Appbar.Content title={headerText} />
-            <Appbar.Action icon="menu" onPress={()=>{}} />
+            <Appbar.Action icon="menu" onPress={()=>navigation.dispatch(DrawerActions.openDrawer())} />
         </Appbar.Header>
     );
 }
