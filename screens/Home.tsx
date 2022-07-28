@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {View} from "react-native";
+import {KeyboardAvoidingView, View} from "react-native";
 import {TextInput} from 'react-native-paper';
 import {todoActions} from '../store/todos/todoSlice';
 import {useAppDispatch, useAppSelector} from "../hooks/redux-hooks";
@@ -21,11 +21,12 @@ const Home: React.FC<HomeScreen> = props => {
     }
     return (
         <Layout headerText="Home">
-            <View style={{flex:1,justifyContent:'space-between'}}>
+            <KeyboardAvoidingView style={{flex:1,justifyContent:'space-between'}}>
                 <TodoList
                     handleEditTodo={handleEditTodo}
                 />
                 <TextInput
+                    autoCorrect={false}
                     style={{backgroundColor:'#fff'}}
                     mode="outlined"
                     label="Type a to do"
@@ -33,7 +34,7 @@ const Home: React.FC<HomeScreen> = props => {
                     onChangeText={text => setText(text)}
                     onSubmitEditing={handleAddTodo}
                 />
-            </View>
+            </KeyboardAvoidingView>
         </Layout>
     );
 }
