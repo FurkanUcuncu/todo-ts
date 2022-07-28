@@ -1,18 +1,18 @@
 import {configureFonts, DefaultTheme, DarkTheme as PaperDarkTheme} from "react-native-paper";
 
-interface font {
-    fontFamily:string,
-    fontWeight:undefined | string
-}
+// interface font {
+//     fontFamily:string,
+//     fontWeight:undefined | string
+// }
+//
+// interface Fonts {
+//     regular: font,
+//     medium: font,
+//     light:font,
+//     thin:font
+// }
 
-interface Fonts {
-    regular: font,
-    medium: font,
-    light:font,
-    thin:font
-}
-
-const fonts: Fonts = {
+const fonts: any = {
     regular: {
         fontFamily: 'redhat-regular',
         fontWeight: 'normal',

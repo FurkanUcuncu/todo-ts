@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, StyleSheet, Animated, TouchableOpacity} from "react-native";
 import {IconButton} from "react-native-paper";
-import {TodosType} from "../../types/TodoTypes";
+import {TodosType} from "../../models/TodoTypes";
 
 interface IProps{
     data:any

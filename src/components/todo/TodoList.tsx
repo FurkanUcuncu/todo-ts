@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Animated} from "react-native";
 import {useAppDispatch, useAppSelector} from '../../hooks/redux-hooks';
-import { TodoType } from '../../types/TodoTypes';
+import { TodoType } from '../../models/TodoTypes';
 import Todo from './Todo';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import TodoActions from './TodoActions';

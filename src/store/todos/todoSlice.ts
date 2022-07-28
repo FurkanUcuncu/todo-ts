@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {TodosType, TodoType} from "../../types/TodoTypes";
+import {TodosType, TodoType} from "../../models/TodoTypes";
 
 // export const fetchLoginData = createAsyncThunk('login/fetchLogin',
 //     async ({params,userType}, { dispatch }) => {

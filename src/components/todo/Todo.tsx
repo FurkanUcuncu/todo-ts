@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {View, StyleSheet, TouchableOpacity, Animated} from "react-native";
 import {Checkbox, useTheme} from 'react-native-paper';
-import { TodoType } from '../../types/TodoTypes';
+import { TodoType } from '../../models/TodoTypes';
 
 interface IProps{
     id:number,

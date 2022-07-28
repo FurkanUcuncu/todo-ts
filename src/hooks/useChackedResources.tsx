@@ -13,8 +13,8 @@ export default function useCachedResources() {
 
                 // Load fonts
                 await Font.loadAsync({
-                    'redhat-black': require('../assets/fonts/RedHatDisplay-Black.ttf'),
-                    'redhat-regular': require('../assets/fonts/RedHatDisplay-Regular.ttf'),
+                    'redhat-black': require('../../assets/fonts/RedHatDisplay-Black.ttf'),
+                    'redhat-regular': require('../../assets/fonts/RedHatDisplay-Regular.ttf'),
                 });
             } catch (e) {
                 // We might want to provide this error information to an error reporting service

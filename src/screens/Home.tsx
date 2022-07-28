@@ -5,7 +5,7 @@ import {todoActions} from '../store/todos/todoSlice';
 import {useAppDispatch, useAppSelector} from "../hooks/redux-hooks";
 import {HomeScreen} from "../routes/StackNavigator";
 import Layout from "../components/layout/Layout";
-import {TodoType} from "../types/TodoTypes";
+import {TodoType} from "../models/TodoTypes";
 import TodoList from '../components/todo/TodoList';
 
 const Home: React.FC<HomeScreen> = props => {
