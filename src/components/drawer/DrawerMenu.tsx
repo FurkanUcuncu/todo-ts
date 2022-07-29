@@ -15,24 +15,24 @@ const DrawerMenu:React.FC<DrawerContentComponentProps> = (props) => {
     const { colors } = useTheme()
     return (
         <>
+            <ImageBackground style={styles.backgroundImage} source={require('../../../assets/images/bg.jpeg')}>
+                <Image style={styles.profileImage} source={require('../../../assets/images/profile.jpeg')} />
+                <Text style={styles.nameText}>Furkan ÜÇÜNCÜ</Text>
+            </ImageBackground>
             <DrawerContentScrollView {...props} contentContainerStyle={styles.drawer}>
-                <ImageBackground style={styles.backgroundImage} source={require('../../../assets/images/bg.jpeg')}>
-                    <Image style={styles.profileImage} source={require('../../../assets/images/profile.jpeg')} />
-                    <Text style={styles.nameText}>Furkan ÜÇÜNCÜ</Text>
-                </ImageBackground>
 
                 <View style={styles.navigationBtnContainer}>
                     <DrawerItemList {...props} />
-                    {/* <DrawerNavItem
-                    text="Free Driving Mode"
-                    icon={<MaterialCommunityIcons name="steering" size={24} color="white" />}
-                    onPress={() => { }}
-                />
-                <DrawerNavItem
-                    text="Settings"
-                    icon={<Feather name="settings" size={24} color="white" />}
-                    onPress={() => { }}
-                /> */}
+                {/*    <DrawerNavItem*/}
+                {/*    text="Free Driving Mode"*/}
+                {/*    icon={<MaterialCommunityIcons name="steering" size={24} color="white" />}*/}
+                {/*    onPress={() => { }}*/}
+                {/*/>*/}
+                {/*<DrawerNavItem*/}
+                {/*    text="Settings"*/}
+                {/*    icon={<Feather name="settings" size={24} color="white" />}*/}
+                {/*    onPress={() => { }}*/}
+                {/*/>*/}
 
                 </View>
             </DrawerContentScrollView>
@@ -50,7 +50,7 @@ export default DrawerMenu
 
 const styles = StyleSheet.create({
     drawer: {
-        backgroundColor: "#30dbd414",
+        // backgroundColor: "#30dbd414",
         flex:1
     },
     nameText:{
