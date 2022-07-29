@@ -4,6 +4,7 @@ import {NavigationContainer, NavigatorScreenParams} from "@react-navigation/nati
 import Settings from "../screens/Settings";
 import {createDrawerNavigator, DrawerNavigationProp, DrawerScreenProps} from "@react-navigation/drawer";
 import DrawerMenu from "../components/drawer/DrawerMenu"
+import UberEatsSwipe from "../screens";
 
 type RootStackParamList = {
     // Home: NavigatorScreenParams<StackParamList> ;
@@ -41,6 +42,7 @@ export const MainStackNavigator = () => {
           >
               <Drawer.Screen name="Home" component={Home} />
               <Drawer.Screen name="Settings" component={Settings} />
+              <Drawer.Screen name="Uber" component={UberEatsSwipe} />
           </Drawer.Navigator>
   );
 }
