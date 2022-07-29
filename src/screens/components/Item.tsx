@@ -60,7 +60,7 @@ const Item = ({ item, onSwipe }: ItemProps) => {
   const deleteOpacity = useValue(1);
   const clock = useClock();
   const to = snapPoint(translateX, velocity.x, snapPoints);
-  const shouldRemove = useValue(0);
+  const shouldRemove = useValue<number>(0);
   useCode(
     () => [
       cond(
@@ -88,7 +88,7 @@ const Item = ({ item, onSwipe }: ItemProps) => {
         </TouchableWithoutFeedback>
       </View>
       <PanGestureHandler failOffsetY={[-5, 5]} activeOffsetX={[-5, 5]} {...gestureHandler}>
-        <Animated.View style={{ height, transform: [{ translateX }] }}>
+        <Animated.View style={[{ height, transform: [{ translateX }] }]}>
           <ItemLayout {...{ item }} />
         </Animated.View>
       </PanGestureHandler>

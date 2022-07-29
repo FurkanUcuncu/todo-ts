@@ -16,7 +16,6 @@ import { HEIGHT } from "./ItemLayout";
 const styles = StyleSheet.create({
     remove: {
         color: "white",
-        fontFamily: "UberMoveMedium",
         fontSize: 14,
     },
 });
@@ -42,32 +41,32 @@ const Action = ({ x, deleteOpacity }: ActionProps) => {
     const textOpacity = sub(1, iconOpacity);
     return (
         <Animated.View
-            style={{
-                backgroundColor: "#D93F12",
+            style={[
+                {backgroundColor: "#D93F12",
                 borderRadius,
                 justifyContent: "center",
                 alignItems: "center",
                 height: size,
                 width: size,
-                transform: [{ translateX }],
-            }}
+                transform: [{ translateX }]}]
+            }
         >
             <Animated.View
-                style={{
+                style={[{
                     height: 5,
                     width: 20,
                     backgroundColor: "white",
                     opacity: iconOpacity,
                     transform: [{ scale }],
-                }}
+                }]}
             />
             <Animated.View
-                style={{
+                style={[{
                     ...StyleSheet.absoluteFillObject,
                     justifyContent: "center",
                     alignItems: "center",
                     opacity: multiply(textOpacity, deleteOpacity),
-                }}
+                }]}
             >
                 <Text style={styles.remove}>Remove</Text>
             </Animated.View>
