@@ -3,8 +3,6 @@ import {
     DrawerContentComponentProps,
     DrawerContentScrollView,
     DrawerItemList,
-    DrawerNavigationProp,
-    DrawerScreenProps,
 } from '@react-navigation/drawer'
 import { StyleSheet, View, Image, ImageBackground, TouchableOpacity } from 'react-native'
 import {Text} from 'react-native-paper'
@@ -20,20 +18,8 @@ const DrawerMenu:React.FC<DrawerContentComponentProps> = (props) => {
                 <Text style={styles.nameText}>Furkan ÜÇÜNCÜ</Text>
             </ImageBackground>
             <DrawerContentScrollView {...props} contentContainerStyle={styles.drawer}>
-
                 <View style={styles.navigationBtnContainer}>
                     <DrawerItemList {...props} />
-                {/*    <DrawerNavItem*/}
-                {/*    text="Free Driving Mode"*/}
-                {/*    icon={<MaterialCommunityIcons name="steering" size={24} color="white" />}*/}
-                {/*    onPress={() => { }}*/}
-                {/*/>*/}
-                {/*<DrawerNavItem*/}
-                {/*    text="Settings"*/}
-                {/*    icon={<Feather name="settings" size={24} color="white" />}*/}
-                {/*    onPress={() => { }}*/}
-                {/*/>*/}
-
                 </View>
             </DrawerContentScrollView>
             <View style={styles.drawerBottom}>
@@ -50,8 +36,7 @@ export default DrawerMenu
 
 const styles = StyleSheet.create({
     drawer: {
-        // backgroundColor: "#30dbd414",
-        flex:1
+        
     },
     nameText:{
         fontSize:20
@@ -63,13 +48,10 @@ const styles = StyleSheet.create({
         marginHorizontal:10,
         fontSize:20
     },
-    drawerContainer: {
-        padding: 20,
-        flex: 1,
-        height: '100%',
-    },
     backgroundImage: {
-        padding: 20,
+        paddingHorizontal: 20,
+        paddingBottom: 20,
+        paddingTop:50,
     },
     profileImage: {
         width: 60,
@@ -90,6 +72,5 @@ const styles = StyleSheet.create({
     navigationBtnContainer: {
         flex: 1,
         backgroundColor: '#fff',
-        paddingTop: 10,
     }
 })

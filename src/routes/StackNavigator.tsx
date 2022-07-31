@@ -1,44 +1,36 @@
-import {createNativeStackNavigator, NativeStackScreenProps} from "@react-navigation/native-stack";
-import {NavigationContainer, NavigatorScreenParams} from "@react-navigation/native";
-import {createDrawerNavigator, DrawerNavigationProp, DrawerScreenProps} from "@react-navigation/drawer";
+import {createDrawerNavigator, DrawerNavigationProp} from "@react-navigation/drawer";
 import DrawerMenu from "../components/drawer/DrawerMenu"
 import Home from "../screens/Home";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useTheme } from "react-native-paper";
 
 type RootStackParamList = {
-    // Home: NavigatorScreenParams<StackParamList> ;
     Home: undefined ;
-    Settings: undefined ;
 };
 
-const MainStack = createNativeStackNavigator<RootStackParamList>()
-
-// export type HomeScreen = NativeStackScreenProps<RootStackParamList, 'Home'>;
 export type HomeScreen = DrawerNavigationProp<RootStackParamList, 'Home'>;
-
-// export const MainStackNavigator = () => {
-//     return(
-//         <MainStack.Navigator
-//             initialRouteName="Home"
-//             screenOptions={{headerShown:false}}
-//         >
-//             <MainStack.Screen name="Home" component={Home} />
-//             <MainStack.Screen options={{ headerShown: false }} name="Settings" component={DrawerStackNavigator} />
-//         </MainStack.Navigator>
-//     )
-// }
 
 const Drawer = createDrawerNavigator();
 
 export const MainStackNavigator = () => {
-  return (
-          <Drawer.Navigator
-              drawerContent={(props) => <DrawerMenu {...props} />}
-              screenOptions={{
-                  headerShown:false,
-                  drawerPosition:"right"
-              }}
-          >
-              <Drawer.Screen name="Home" component={Home} />
-          </Drawer.Navigator>
-  );
+    const {colors} = useTheme()
+    return (
+            <Drawer.Navigator
+                drawerContent={(props) => <DrawerMenu {...props} />}
+                screenOptions={{
+                    headerShown:false,
+                    drawerPosition: "right",
+                    drawerActiveTintColor:colors.primary
+                }}
+            >
+            <Drawer.Screen
+                options={{
+                    drawerIcon: ({ color, size }) => (<MaterialCommunityIcons name="home-modern" size={size} color={color} />),
+                    
+                }}
+                name="Home"
+                component={Home}
+            />
+            </Drawer.Navigator>
+    );
 }

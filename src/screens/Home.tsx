@@ -8,7 +8,7 @@ import Layout from "../components/layout/Layout";
 import {TodoType} from "../models/TodoTypes";
 import TodoList from '../components/todo/TodoList';
 
-const Home: React.FC<HomeScreen> = props => {
+const Home: React.FC = props => {
     const dispatch = useAppDispatch()
     const { todos } = useAppSelector(state => state?.todo)
     const [text,setText] = useState<string>("")

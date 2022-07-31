@@ -1,59 +1,102 @@
-import React, {useEffect} from 'react';
-import {View, StyleSheet, TouchableOpacity, Animated} from "react-native";
-import {Checkbox, useTheme} from 'react-native-paper';
-import { TodoType } from '../../models/TodoTypes';
-import Item from '../swipe/Item';
+import React from "react";
+import { Dimensions, StyleSheet, View } from "react-native";
+import Animated, {
+  abs,
+  add,
+  call,
+  clockRunning,
+  cond,
+  eq,
+  not,
+  set,
+  useCode,
+} from "react-native-reanimated";
+import {
+  PanGestureHandler,
+  State,
+  TouchableWithoutFeedback,
+} from "react-native-gesture-handler";
+import {
+  snapPoint,
+  timing,
+  useClock,
+  usePanGestureHandler,
+  useValue,
+  minus,
+  clamp,
+} from "react-native-redash";
 
-interface IProps{
-    id:number,
-    text:string,
-    completed:boolean,
-    handleEditTodo: () => void,
-    removeTodo: (rowMap: TodoType, id: number) => void,
-    rowMap:any,
-    rowHeightAnimatedValue: any,
-    rightActionState:any
-}
+import ItemLayout, { HEIGHT } from "./ItemLayout";
+import Action from "./Action";
+import { TodoType } from "../../models/TodoTypes";
 
-const Todo:React.FC<IProps> = props => {
-    const { colors } = useTheme()
-
-    if(props.rightActionState){
-        Animated.timing(props.rowHeightAnimatedValue, {
-            toValue: 0,
-            duration: 200,
-            useNativeDriver: false,
-        }).start(() => {
-            props.removeTodo(props.rowMap,props.id);
-        });
-    }
-
-    return (
-        <Animated.View style={[styles.rowFront,{height: props.rowHeightAnimatedValue}]}>
-            <TouchableOpacity onPress={props.handleEditTodo}>
-                <Checkbox.Item position="leading" color={colors.primary} labelStyle={{width:'100%', textAlign:'left',textDecorationLine: props.completed ? 'line-through' : 'none'}} label={props.text} status={props.completed ? "checked" : "unchecked"} />
-            </TouchableOpacity>
-        </Animated.View>
-    );
-}
-
+const { width } = Dimensions.get("window");
+const snapPoints = [-width, -100, 0];
 const styles = StyleSheet.create({
-    row: {
-        // flexDirection:'row'
-    },
-    rowFront: {
-        justifyContent:'center',
-        backgroundColor: '#FFF',
-        borderRadius: 5,
-        height: 60,
-        margin: 5,
-        marginBottom: 15,
-        shadowColor: '#999',
-        shadowOffset: {width: 0, height: 1},
-        shadowOpacity: 0.8,
-        shadowRadius: 2,
-        elevation: 5,
-    },
+  background: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "#E1E2E3",
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    overflow: "hidden",
+    borderRadius:5
+  },
 });
 
-export default Todo;
+interface ItemProps {
+  item: TodoType;
+  onSwipe: () => void;
+  handleEditTodo: () => void;
+}
+
+const Item = ({ item, onSwipe, handleEditTodo }: ItemProps) => {
+  const {
+    gestureHandler,
+    translation,
+    velocity,
+    state,
+  } = usePanGestureHandler();
+  const translateX = useValue(0);
+  const offsetX = useValue(0);
+  const height = useValue(HEIGHT);
+  const deleteOpacity = useValue(1);
+  const clock = useClock();
+  const to = snapPoint(translateX, velocity.x, snapPoints);
+  const shouldRemove = useValue<number>(0);
+  useCode(
+    () => [
+      cond(
+        eq(state, State.ACTIVE),
+        set(translateX, add(offsetX, clamp(translation.x,  -9999, minus(offsetX) )))
+      ),
+      cond(eq(state, State.END), [
+        set(translateX, timing({ clock, from: translateX, to })),
+        set(offsetX, translateX),
+        cond(eq(to, -width), set(shouldRemove, 1)),
+      ]),
+      cond(shouldRemove, [
+        set(height, timing({ from: HEIGHT, to: 0 })),
+        set(deleteOpacity, 0),
+        cond(not(clockRunning(clock)), call([], onSwipe)),
+      ]),
+    ],
+    [onSwipe]
+  );
+  return (
+    <Animated.View>
+      <View style={styles.background}>
+        <TouchableWithoutFeedback onPress={() => shouldRemove.setValue(1)}>
+          <Action x={abs(translateX)} {...{ deleteOpacity }} />
+        </TouchableWithoutFeedback>
+      </View>
+      <PanGestureHandler failOffsetY={[-5, 5]} activeOffsetX={[-5, 5]} {...gestureHandler}>
+        <Animated.View style={[{ height, transform: [{ translateX }] }]}>
+          <ItemLayout handleEditTodo={handleEditTodo} {...{ item }} />
+        </Animated.View>
+      </PanGestureHandler>
+    </Animated.View>
+  );
+};
+
+export default Item;

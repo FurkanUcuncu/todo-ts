@@ -12,6 +12,12 @@ const initialTodoState:TodosType = {
         {id:1,text:'imtodo',completed:false},
         {id:2,text:'imtodo2',completed:false},
         {id:3,text:'imtodo3',completed:false},
+        {id:4,text:'imtodo3',completed:false},
+        {id:5,text:'imtodo3',completed:false},
+        {id:6,text:'imtodo3',completed:false},
+        {id:7,text:'imtodo3',completed:false},
+        {id:8,text:'imtodo3',completed:false},
+        {id:9,text:'imtodo3',completed:false},
     ],
     todo:{
         id:0,

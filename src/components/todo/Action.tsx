@@ -68,7 +68,7 @@ const Action = ({ x, deleteOpacity }: ActionProps) => {
                     opacity: multiply(textOpacity, deleteOpacity),
                 }]}
             >
-                <Text style={styles.remove}>Remove</Text>
+                <Text style={styles.remove}>Sil</Text>
             </Animated.View>
         </Animated.View>
     );

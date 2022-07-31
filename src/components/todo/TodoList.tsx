@@ -1,121 +1,41 @@
 import React from 'react';
-import {StyleSheet, Animated} from "react-native";
+import {StyleSheet, View} from "react-native";
 import {useAppDispatch, useAppSelector} from '../../hooks/redux-hooks';
 import { TodoType } from '../../models/TodoTypes';
 import Todo from './Todo';
-import { SwipeListView } from 'react-native-swipe-list-view';
-import TodoActions from './TodoActions';
 import {todoActions} from "../../store/todos/todoSlice";
 
 interface IProps {
     handleEditTodo:(todo:TodoType)=>void
 }
 
-const TodoList: React.FC<IProps> = props => {
+const TodoSwipeList: React.FC<IProps> = props => {
     const dispatch = useAppDispatch()
     const { todos } = useAppSelector(state => state?.todo)
 
-    const closeRow = (rowMap:any, rowKey:number)  => {
-        const currentIndex = todos.map((todo,index)=>todo.id === rowKey).indexOf(true)
-        console.log(rowMap["1"])
-        if (rowMap[currentIndex]) {
-            rowMap[rowKey].closeRow();
-        }
-    };
-
-    const deleteRow = (rowMap:any, rowKey:number) => {
-        dispatch(todoActions.deleteTodo({id: rowKey}))
-        closeRow(rowMap, rowKey);
-    };
-
-    const onRowDidOpen = (rowKey:number) => {
-        console.log('This row opened', rowKey);
-    };
-
-    const onLeftActionStatusChange = (rowKey:number) => {
-        console.log('onLeftActionStatusChange', rowKey);
-    };
-
-    const onRightActionStatusChange = (rowKey:number) => {
-        console.log('onRightActionStatusChange', rowKey);
-    };
-
-    const onRightAction = (rowKey:number) => {
-        console.log('onRightAction', rowKey);
-    };
-
-    const onLeftAction = (rowKey:number) => {
-        console.log('onLeftAction', rowKey);
+    const deleteRow = (todo:TodoType) => {
+        dispatch(todoActions.deleteTodo({id: todo.id}))
     };
 
     return (
-        <Animated.View
+        <View
             style={{ flex:1 }}
-            // entering={LightSpeedInRight}
-            // exiting={LightSpeedOutRight}
-            // layout={Layout.springify()}
         >
-            {/* {
-                todos.map((todo:TodoType) => {
+            {
+                todos.map((item:TodoType) => {
                     return (
-                        <Todo
-                            key={todo.id}
-                            id={todo.id}
-                            text={todo.text}
-                            completed={todo.completed}
-                            handleEditTodo={()=>props.handleEditTodo(todo)}
-                        />
+                        <View style={{marginBottom:15}}>
+                            <Todo
+                                key={item.id}
+                                handleEditTodo={()=>props.handleEditTodo(item)}
+                                onSwipe={()=>deleteRow(item)}
+                                {...{ item }}
+                            />
+                        </View>
                     )
                 })
-            } */}
-            <SwipeListView
-                data={todos}
-                renderItem={(data, rowMap) => {
-                    const rowHeightAnimatedValue = new Animated.Value(60);
-                    return (
-                        <Todo
-                            id={data.item.id}
-                            rowMap={rowMap}
-                            text={data.item.text}
-                            completed={data.item.completed}
-                            handleEditTodo={() => props.handleEditTodo(data.item)}
-                            removeTodo={() => deleteRow(rowMap, data.item.id)}
-                            rowHeightAnimatedValue={rowHeightAnimatedValue}
-                            rightActionState={false}
-                        />
-                    )
-                }}
-                renderHiddenItem={(data, rowMap) => {
-                    const rowActionAnimatedValue = new Animated.Value(75);
-                    const rowHeightAnimatedValue = new Animated.Value(60);
-                    return(
-                        <TodoActions
-                            data={data}
-                            rowMap={rowMap}
-                            rowActionAnimatedValue={rowActionAnimatedValue}
-                            rowHeightAnimatedValue={rowHeightAnimatedValue}
-                            onClose={() => closeRow(rowMap, data.item.id)}
-                            onDelete={() => deleteRow(rowMap, data.item.id)}
-                            leftActionActivated={false}
-                            rightActionActivated={false}
-                            swipeAnimatedValue={false}
-                        />
-                    )
-                }}
-                leftOpenValue={75}
-                rightOpenValue={-75}
-                disableRightSwipe
-                leftActivationValue={100}
-                rightActivationValue={-200}
-                leftActionValue={0}
-                onRowDidOpen={()=>onRowDidOpen(5)}
-                rightActionValue={-500}
-                // onLeftAction={onLeftAction}
-                onRightAction={()=>onRightAction(5)}
-                // onLeftActionStatusChange={onLeftActionStatusChange}
-                onRightActionStatusChange={()=>onRightActionStatusChange(5)}
-            />
-        </Animated.View>
+            }
+        </View>
     );
 }
 
@@ -127,7 +47,7 @@ const styles = StyleSheet.create({
     backTextWhite: {
         color: '#FFF',
     },
-    rowFront: {
+    todoContainer: {
         justifyContent:'center',
         backgroundColor: '#FFF',
         borderRadius: 5,
@@ -194,4 +114,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default TodoList;
+export default TodoSwipeList;
