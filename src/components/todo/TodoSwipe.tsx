@@ -29,11 +29,16 @@ const Todo:React.FC<IProps> = props => {
     }
 
     return (
-        <Animated.View style={[styles.rowFront,{height: props.rowHeightAnimatedValue}]}>
-            <TouchableOpacity onPress={props.handleEditTodo}>
-                <Checkbox.Item position="leading" color={colors.primary} labelStyle={{width:'100%', textAlign:'left',textDecorationLine: props.completed ? 'line-through' : 'none'}} label={props.text} status={props.completed ? "checked" : "unchecked"} />
-            </TouchableOpacity>
-        </Animated.View>
+        <View style={[styles.rowFront,{height: props.rowHeightAnimatedValue}]}>
+            <Item
+                onSwipe={() => {
+                    const newItems = [...items];
+                    newItems.splice(newItems.indexOf(item), 1);
+                    setItems(newItems);
+                }}
+                {...{ item }}
+            />
+        </View>
     );
 }
 

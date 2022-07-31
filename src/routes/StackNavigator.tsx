@@ -1,10 +1,8 @@
 import {createNativeStackNavigator, NativeStackScreenProps} from "@react-navigation/native-stack";
 import {NavigationContainer, NavigatorScreenParams} from "@react-navigation/native";
-import Settings from "../screens/Settings";
 import {createDrawerNavigator, DrawerNavigationProp, DrawerScreenProps} from "@react-navigation/drawer";
 import DrawerMenu from "../components/drawer/DrawerMenu"
 import Home from "../screens/Home";
-import UberEatsSwipe from "../screens/UberEatsSwipe";
 
 type RootStackParamList = {
     // Home: NavigatorScreenParams<StackParamList> ;
@@ -41,8 +39,6 @@ export const MainStackNavigator = () => {
               }}
           >
               <Drawer.Screen name="Home" component={Home} />
-              <Drawer.Screen name="Settings" component={Settings} />
-              <Drawer.Screen name="Uber" component={UberEatsSwipe} />
           </Drawer.Navigator>
   );
 }
