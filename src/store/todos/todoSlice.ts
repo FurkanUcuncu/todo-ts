@@ -1,24 +1,8 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {TodosType, TodoType} from "../../models/TodoTypes";
 
-// export const fetchLoginData = createAsyncThunk('login/fetchLogin',
-//     async ({params,userType}, { dispatch }) => {
-//         return res = await authService.getLoginData({ ...params })
-//     }
-// )
-
 const initialTodoState:TodosType = {
-    todos:[
-        {id:1,text:'imtodo',completed:false},
-        {id:2,text:'imtodo2',completed:false},
-        {id:3,text:'imtodo3',completed:false},
-        {id:4,text:'imtodo3',completed:false},
-        {id:5,text:'imtodo3',completed:false},
-        {id:6,text:'imtodo3',completed:false},
-        {id:7,text:'imtodo3',completed:false},
-        {id:8,text:'imtodo3',completed:false},
-        {id:9,text:'imtodo3',completed:false},
-    ],
+    todos:[],
     todo:{
         id:0,
         text:"",
@@ -40,18 +24,6 @@ const todoSlice = createSlice({
             state.todos = state.todos.filter((todo:TodoType)=>todo.id !== action.payload.id )
         }
     },
-    // extraReducers: (builder) => {
-    //     builder.addCase(fetchLoginData.fulfilled, (state, action) => {
-    //         state.token = action.payload.data.Item1
-    //         state.userInfos = action.payload.data.Item2
-    //     })
-    //     builder.addCase(fetchLoginData.pending, (state) => {
-    //         state.messageText = "Giriş Yapılıyor..."
-    //     })
-    //     builder.addCase(fetchLoginData.rejected, (state) => {
-    //         state.messageText = "Giriş Yaparken Bir Hata Oluştu..."
-    //     })
-    // }
 })
 
 export const todoActions = todoSlice.actions
