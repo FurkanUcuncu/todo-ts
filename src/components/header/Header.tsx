@@ -7,17 +7,10 @@ interface IProps {
     headerText:string,
 }
 
-const Header: React.FC<IProps> = ({backIcon,headerText}) => {
+const Header: React.FC<IProps> = ({headerText}) => {
     const navigation = useNavigation()
-    const _goBack = () => {
-        navigation.goBack()
-    };
     return (
         <Appbar.Header dark>
-            {
-                backIcon &&
-                <Appbar.BackAction onPress={_goBack} />
-            }
             <Appbar.Content title={headerText} />
             <Appbar.Action icon="menu" onPress={()=>navigation.dispatch(DrawerActions.openDrawer())} />
         </Appbar.Header>
