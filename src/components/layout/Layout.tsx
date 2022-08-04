@@ -1,5 +1,5 @@
 import React from 'react';
-import {Keyboard, ScrollView, TouchableWithoutFeedback, View} from "react-native";
+import {Keyboard, StatusBar, TouchableWithoutFeedback, View} from "react-native";
 import Header from '../header/Header';
 
 interface ILayoutProps {
@@ -11,12 +11,15 @@ interface ILayoutProps {
 const Layout: React.FC<ILayoutProps> = props => {
     return (
         <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
-            <View style={{flex:1,backgroundColor:'#fff'}}>
-                <Header headerText={props.headerText} backIcon={props.backIcon} />
-                <View style={{flex:1,margin:20,}}>
-                    {props.children}
+            <>
+                <StatusBar barStyle="light-content" />
+                <View style={{ flex: 1, backgroundColor: '#fff' }}>
+                    <Header headerText={props.headerText} backIcon={props.backIcon} />
+                    <View style={{flex:1,margin:20,}}>
+                        {props.children}
+                    </View>
                 </View>
-            </View>
+            </>
         </TouchableWithoutFeedback>
     );
 }
