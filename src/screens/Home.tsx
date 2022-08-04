@@ -3,12 +3,12 @@ import {KeyboardAvoidingView, View} from "react-native";
 import {TextInput} from 'react-native-paper';
 import {todoActions} from '../store/todos/todoSlice';
 import {useAppDispatch, useAppSelector} from "../hooks/redux-hooks";
-import {HomeScreen} from "../routes/StackNavigator";
 import Layout from "../components/layout/Layout";
 import {TodoType} from "../models/TodoTypes";
 import TodoList from '../components/todo/TodoList';
+import { Text } from 'react-native';
 
-const Home: React.FC = props => {
+const Home: React.FC = () => {
     const dispatch = useAppDispatch()
     const { todos } = useAppSelector(state => state?.todo)
     const [text,setText] = useState<string>("")
@@ -22,9 +22,13 @@ const Home: React.FC = props => {
     return (
         <Layout headerText="Home">
             <KeyboardAvoidingView style={{flex:1,justifyContent:'space-between'}}>
-                <TodoList
-                    handleEditTodo={handleEditTodo}
-                />
+                {
+                    todos.length === 0 ?
+                        <Text style={{textAlign:'center',fontSize:20}}>Your to do list is empty</Text> :
+                        <TodoList
+                            handleEditTodo={handleEditTodo}
+                        />
+                }
                 <TextInput
                     autoCorrect={false}
                     style={{backgroundColor:'#fff'}}
