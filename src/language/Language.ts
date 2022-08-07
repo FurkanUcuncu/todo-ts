@@ -13,7 +13,8 @@ export const Language:any = {
         "add": "Add",
         "back": "Back",
         "dark": "Dark",
-        "light": "Light"
+        "light": "Light",
+        "signOut" : "Sign Out"
     },
     tr: {
         "code": "tr",
@@ -29,6 +30,7 @@ export const Language:any = {
         "add": "Ekle",
         "back": "Geri",
         "dark": "Karanlık",
-        "light": "Aydınlık"
+        "light": "Aydınlık",
+        "signOut" : "Çıkış Yap"
     }
 }
