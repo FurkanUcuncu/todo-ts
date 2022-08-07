@@ -11,6 +11,7 @@ const Home: React.FC = () => {
     const dispatch = useAppDispatch()
     const {colors} = useTheme()
     const { todos } = useAppSelector(state => state?.todo)
+    const { language } = useAppSelector(state => state?.settings)
     const [text,setText] = useState<string>("")
     const handleEditTodo = (currentTodo:TodoType) => {
         dispatch(todoActions.updateTodo(todos.map((todo:TodoType)=>todo.id === currentTodo.id ? {...todo,completed:!currentTodo.completed} : todo)))
@@ -22,11 +23,11 @@ const Home: React.FC = () => {
         setText('')
     }
     return (
-        <Layout headerText="Home">
+        <Layout headerText={language.home}>
             <KeyboardAvoidingView style={{flex:1,justifyContent:'space-between'}}>
                 {
                     todos.length === 0 ?
-                        <Text style={{textAlign:'center',fontSize:20}}>Your to do list is empty</Text> :
+                        <Text style={{ textAlign: 'center', fontSize: 20 }}>{language.noTodos}</Text> :
                         <TodoList
                             handleEditTodo={handleEditTodo}
                         />
@@ -36,7 +37,7 @@ const Home: React.FC = () => {
                         autoCorrect={false}
                         style={{backgroundColor:'#fff',flex:1, borderRadius:20}}
                         mode="outlined"
-                        label="Type a to do"
+                        label={language.addTodo}
                         value={text}
                         onChangeText={text => setText(text)}
                         onSubmitEditing={handleAddTodo}
