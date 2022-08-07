@@ -8,8 +8,10 @@ import { StyleSheet, View, Image, ImageBackground, TouchableOpacity } from 'reac
 import {Text} from 'react-native-paper'
 import { MaterialIcons } from '@expo/vector-icons';
 import {useTheme} from "react-native-paper";
+import { useText } from '../../context/SettingsContext';
 
-const DrawerMenu:React.FC<DrawerContentComponentProps> = (props) => {
+const DrawerMenu: React.FC<DrawerContentComponentProps> = (props) => {
+    console.log(props)
     const { colors } = useTheme()
     return (
         <>
@@ -25,7 +27,7 @@ const DrawerMenu:React.FC<DrawerContentComponentProps> = (props) => {
             <View style={styles.drawerBottom}>
                 <TouchableOpacity style={styles.logoutBtn}>
                     <MaterialIcons name="logout" size={24} color={colors.primary} />
-                    <Text style={styles.signOutText}>Sign Out</Text>
+                    <Text style={styles.signOutText}>{useText('signOut')}</Text>
                 </TouchableOpacity>
             </View>
         </>

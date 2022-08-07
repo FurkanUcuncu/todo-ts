@@ -27,18 +27,22 @@ export const MainStackNavigator = () => {
             >
             <Drawer.Screen
                 options={{
+                    drawerLabel:useText('home'),
                     drawerIcon: ({ color, size }) => (<MaterialCommunityIcons name="home-modern" size={size} color={color} />),
 
                 }}
-                name={useText('home')}
+                // name={useText('home')}
+                name="Home"
                 component={Home}
             />
             <Drawer.Screen
                 options={{
+                    drawerLabel:useText('settings'),
                     drawerIcon: ({ color, size }) => (<MaterialCommunityIcons name="cog-outline" size={size} color={color} />),
 
                 }}
-                name={useText('settings')}
+                // name={useText('settings')}
+                name="Settings"
                 component={Settings}
             />
         </Drawer.Navigator>
