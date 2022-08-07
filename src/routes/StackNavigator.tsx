@@ -3,6 +3,7 @@ import DrawerMenu from "../components/drawer/DrawerMenu"
 import Home from "../screens/Home";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from "react-native-paper";
+import Settings from "../screens/Settings";
 
 type RootStackParamList = {
     Home: undefined ;
@@ -31,6 +32,14 @@ export const MainStackNavigator = () => {
                 name="Home"
                 component={Home}
             />
-            </Drawer.Navigator>
+            <Drawer.Screen
+                options={{
+                    drawerIcon: ({ color, size }) => (<MaterialCommunityIcons name="cog-outline" size={size} color={color} />),
+                    
+                }}
+                name="Settings"
+                component={Settings}
+            />
+        </Drawer.Navigator>
     );
 }
