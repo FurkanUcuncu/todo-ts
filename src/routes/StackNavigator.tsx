@@ -4,6 +4,7 @@ import Home from "../screens/Home";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from "react-native-paper";
 import Settings from "../screens/Settings";
+import {useText} from "../context/SettingsContext";
 
 type RootStackParamList = {
     Home: undefined ;
@@ -27,17 +28,17 @@ export const MainStackNavigator = () => {
             <Drawer.Screen
                 options={{
                     drawerIcon: ({ color, size }) => (<MaterialCommunityIcons name="home-modern" size={size} color={color} />),
-                    
+
                 }}
-                name="Home"
+                name={useText('home')}
                 component={Home}
             />
             <Drawer.Screen
                 options={{
                     drawerIcon: ({ color, size }) => (<MaterialCommunityIcons name="cog-outline" size={size} color={color} />),
-                    
+
                 }}
-                name="Settings"
+                name={useText('settings')}
                 component={Settings}
             />
         </Drawer.Navigator>

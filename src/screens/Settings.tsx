@@ -1,11 +1,9 @@
 import React, { useContext } from 'react';
 import {View, StyleSheet, Text, TouchableOpacity} from "react-native";
-import {IconButton, useTheme, Switch} from 'react-native-paper';
+import {useTheme, Switch} from 'react-native-paper';
 import {useAppDispatch, useAppSelector} from "../hooks/redux-hooks";
 import Layout from "../components/layout/Layout";
-import { settingsActions } from '../store/settings/settingsSlice';
-import { Language } from '../language/Language';
-import { SettingsContext } from '../context/SettingsContext';
+import {SettingsContext, useText} from '../context/SettingsContext';
 
 const data = [
     { code: 'en', name: 'English' },
@@ -16,16 +14,11 @@ const Settings: React.FC = () => {
     const dispatch = useAppDispatch()
 
     const { colors } = useTheme()
-    const { language } = useAppSelector(state => state?.settings)
 
-    const { toggleTheme, isThemeDark } = useContext(SettingsContext);
-
-    const changeLanguage = (code:string) => {
-            dispatch(settingsActions.changeLanguage(Language[code]))
-    }
+    const { toggleTheme, isThemeDark, changeLanguage, language } = useContext(SettingsContext);
 
     return (
-        <Layout headerText={language.settings}>
+        <Layout headerText={useText('settings')}>
             <View style={styles.container}>
                 <Switch value={isThemeDark} onValueChange={toggleTheme} />
                 <View style={styles.languageContainer}>

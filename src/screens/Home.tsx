@@ -6,12 +6,12 @@ import {useAppDispatch, useAppSelector} from "../hooks/redux-hooks";
 import Layout from "../components/layout/Layout";
 import {TodoType} from "../models/TodoTypes";
 import TodoList from '../components/todo/TodoList';
+import {useText} from "../context/SettingsContext";
 
 const Home: React.FC = () => {
     const dispatch = useAppDispatch()
     const {colors} = useTheme()
     const { todos } = useAppSelector(state => state?.todo)
-    const { language } = useAppSelector(state => state?.settings)
     const [text,setText] = useState<string>("")
     const handleEditTodo = (currentTodo:TodoType) => {
         dispatch(todoActions.updateTodo(todos.map((todo:TodoType)=>todo.id === currentTodo.id ? {...todo,completed:!currentTodo.completed} : todo)))
@@ -23,11 +23,11 @@ const Home: React.FC = () => {
         setText('')
     }
     return (
-        <Layout headerText={language.home}>
+        <Layout headerText={useText('home')}>
             <KeyboardAvoidingView style={{flex:1,justifyContent:'space-between'}}>
                 {
                     todos.length === 0 ?
-                        <Text style={{ textAlign: 'center', fontSize: 20 }}>{language.noTodos}</Text> :
+                        <Text style={{ textAlign: 'center', fontSize: 20 }}>{useText('noTodos')}</Text> :
                         <TodoList
                             handleEditTodo={handleEditTodo}
                         />
@@ -37,7 +37,7 @@ const Home: React.FC = () => {
                         autoCorrect={false}
                         style={{backgroundColor:'#fff',flex:1, borderRadius:20}}
                         mode="outlined"
-                        label={language.addTodo}
+                        label={useText('addTodo')}
                         value={text}
                         onChangeText={text => setText(text)}
                         onSubmitEditing={handleAddTodo}
@@ -47,7 +47,7 @@ const Home: React.FC = () => {
                         icon="send"
                         color={colors.primary}
                         size={20}
-                        onPress={handleAddTodo} 
+                        onPress={handleAddTodo}
                     />
                 </View>
             </KeyboardAvoidingView>
