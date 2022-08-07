@@ -8,24 +8,25 @@ import store from "./src/store";
 import useCachedResources from "./src/hooks/useChackedResources";
 import { NavigationContainer } from "@react-navigation/native";
 import {SettingsContext} from './src/context/SettingsContext'
+import {Language} from "./src/language/Language";
 
 const App = () => {
   const isLoadingComplete = useCachedResources();
-  
+
   const [isThemeDark, setIsThemeDark] = useState(false);
-  const [language, setLanguage] = useState('en')
+  const [language, setLanguage] = useState(Language['en'])
 
   let theme = isThemeDark ? CustomSettings.darkTheme : CustomSettings.theme
-  
+
   const toggleTheme = useCallback(() => {
     return setIsThemeDark(!isThemeDark);
   }, [isThemeDark]);
 
-  const changeLanguage = useCallback((lang:string) => {
-    return setLanguage(lang)
-  },[language])
+  const changeLanguage = useCallback((lang) => {
+    return setLanguage(Language[lang])
+  },[setLanguage])
 
-  const preferences = useMemo(
+  const value = useMemo(
     () => ({
       toggleTheme,
       isThemeDark,
@@ -38,10 +39,10 @@ const App = () => {
   if (!isLoadingComplete) {
     return null;
   }
-  
+
   return (
     <Provider store={store}>
-      <SettingsContext.Provider value={preferences}>
+      <SettingsContext.Provider value={value}>
           <PaperProvider theme={theme}>
               <NavigationContainer>
                   <MainStackNavigator/>
