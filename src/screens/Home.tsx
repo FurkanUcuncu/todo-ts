@@ -24,7 +24,7 @@ const Home: React.FC = () => {
     }
     return (
         <Layout headerText={useText('home')}>
-            <KeyboardAvoidingView style={{flex:1,justifyContent:'space-between'}}>
+            <KeyboardAvoidingView style={{flex:1,justifyContent:'space-between',backgroundColor:colors.bodyBg}}>
                 {
                     todos.length === 0 ?
                         <Text style={{ textAlign: 'center', fontSize: 20 }}>{useText('noTodos')}</Text> :
