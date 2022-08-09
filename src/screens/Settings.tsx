@@ -11,22 +11,37 @@ const data = [
 ]
 
 const Settings: React.FC = () => {
-    const dispatch = useAppDispatch()
-
     const { colors } = useTheme()
 
     const { toggleTheme, isThemeDark, changeLanguage, language } = useContext(SettingsContext);
 
+    const textColor = colors?.body?.text
+
     return (
         <Layout headerText={useText('settings')}>
             <View style={styles.container}>
-                <Switch value={isThemeDark} onValueChange={toggleTheme} />
+                <View style={styles.row}>
+                    <Text style={[styles.themeText,{color:textColor}]}>{useText('light')}</Text>
+                    <Switch value={isThemeDark} onValueChange={toggleTheme} />
+                    <Text style={[styles.themeText,{color:textColor}]}>{useText('dark') }</Text>
+                </View>
                 <View style={styles.languageContainer}>
                     {
                         data.map((item) => {
                             return (
                                 <TouchableOpacity key={item.code} onPress={() => changeLanguage(item.code)}>
-                                    <Text style={[styles.languageText,{fontWeight:item.code === language.code ? 'bold' : 'normal'}]} >{item.name}</Text>
+                                    <Text
+                                        style={
+                                            [styles.languageText,
+                                                {
+                                                    color: textColor,
+                                                    fontWeight: item.code === language.code ? 'bold' : 'normal'
+                                                }
+                                            ]
+                                        }
+                                    >
+                                        {item.name}
+                                    </Text>
                                 </TouchableOpacity>
                             )
                         })
@@ -42,6 +57,14 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent:'center'
+    },
+    row: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom:30,
+    },
+    themeText: {
+        marginHorizontal: 10,
     },
     bottomContainer: {
         flexDirection: 'row',

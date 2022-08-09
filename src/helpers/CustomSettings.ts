@@ -39,7 +39,7 @@ const theme = {
 
 const darkTheme = {
     ...PaperDarkTheme,
-    version:3,
+    version: 2,
     colors:{
         ...PaperDarkTheme.colors,
         primary: '#17C3B2',

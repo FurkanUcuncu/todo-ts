@@ -16,7 +16,7 @@ const Layout: React.FC<ILayoutProps> = props => {
         <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
             <>
                 <StatusBar barStyle="light-content" />
-                <View style={{ flex: 1, backgroundColor: colors.bodyBg }}>
+                <View style={{ flex: 1, backgroundColor: colors.background }}>
                     <Header headerText={props.headerText} backIcon={props.backIcon} />
                     <View style={{flex:1,margin:20,}}>
                         {props.children}

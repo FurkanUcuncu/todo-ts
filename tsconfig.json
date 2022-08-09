@@ -12,6 +12,7 @@
     "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
+    // "typeRoots": ["./src/models/ThemeTypes.d.ts"]
     // "noImplicitAny": true,
     // "strictNullChecks": true,
     // "strictFunctionTypes": true,
