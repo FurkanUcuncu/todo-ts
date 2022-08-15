@@ -14,15 +14,15 @@ const Layout: React.FC<ILayoutProps> = props => {
     const {colors} = useTheme()
     return (
         <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
-            <>
+            <View style={{flex:1}}>
                 <StatusBar barStyle="light-content" />
-                <View style={{ flex: 1, backgroundColor: colors.background }}>
+                <View style={{ flex: 1, backgroundColor: colors?.body?.bg }}>
                     <Header headerText={props.headerText} backIcon={props.backIcon} />
                     <View style={{flex:1,margin:20,}}>
                         {props.children}
                     </View>
                 </View>
-            </>
+            </View>
         </TouchableWithoutFeedback>
     );
 }

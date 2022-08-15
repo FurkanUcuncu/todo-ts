@@ -8,7 +8,9 @@ import store from "./src/store";
 import useCachedResources from "./src/hooks/useChackedResources";
 import { NavigationContainer } from "@react-navigation/native";
 import {SettingsContext} from './src/context/SettingsContext'
-import {Language} from "./src/language/Language";
+import { Language } from "./src/language/Language";
+import { LogBox } from 'react-native';
+LogBox.ignoreAllLogs();
 
 const App = () => {
   const isLoadingComplete = useCachedResources();

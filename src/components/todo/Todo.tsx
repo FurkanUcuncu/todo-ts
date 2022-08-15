@@ -29,20 +29,10 @@ import {
 import ItemLayout, { HEIGHT } from "./ItemLayout";
 import Action from "./Action";
 import { TodoType } from "../../models/TodoTypes";
+import { useTheme } from "react-native-paper";
 
 const { width } = Dimensions.get("window");
 const snapPoints = [-width, -100, 0];
-const styles = StyleSheet.create({
-  background: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: "#E1E2E3",
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    alignItems: "center",
-    overflow: "hidden",
-    borderRadius:5
-  },
-});
 
 interface ItemProps {
   item: TodoType;
@@ -64,6 +54,7 @@ const Item = ({ item, onSwipe, handleEditTodo }: ItemProps) => {
   const clock = useClock();
   const to = snapPoint(translateX, velocity.x, snapPoints);
   const shouldRemove = useValue<number>(0);
+  const {colors} = useTheme()
   useCode(
     () => [
       cond(
@@ -85,7 +76,7 @@ const Item = ({ item, onSwipe, handleEditTodo }: ItemProps) => {
   );
   return (
     <Animated.View>
-      <View style={styles.background}>
+      <View style={[styles.background,{backgroundColor:colors?.todo?.bg}]}>
         <TouchableWithoutFeedback onPress={() => shouldRemove.setValue(1)}>
           <Action x={abs(translateX)} {...{ deleteOpacity }} />
         </TouchableWithoutFeedback>
@@ -98,5 +89,16 @@ const Item = ({ item, onSwipe, handleEditTodo }: ItemProps) => {
     </Animated.View>
   );
 };
+
+const styles = StyleSheet.create({
+  background: {
+    ...StyleSheet.absoluteFillObject,
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    overflow: "hidden",
+    borderRadius:5
+  },
+});
 
 export default Item;

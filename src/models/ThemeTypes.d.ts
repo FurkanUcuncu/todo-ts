@@ -1,5 +1,6 @@
 export declare global {
   namespace ReactNativePaper {
+
     interface ThemeColors {
       header: {
             bg: string,

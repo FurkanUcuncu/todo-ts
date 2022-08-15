@@ -21,9 +21,34 @@ const Settings: React.FC = () => {
         <Layout headerText={useText('settings')}>
             <View style={styles.container}>
                 <View style={styles.row}>
-                    <Text style={[styles.themeText,{color:textColor}]}>{useText('light')}</Text>
-                    <Switch value={isThemeDark} onValueChange={toggleTheme} />
-                    <Text style={[styles.themeText,{color:textColor}]}>{useText('dark') }</Text>
+                    <Text style={[styles.themeText,
+                            {
+                                color: textColor,
+                                opacity: !isThemeDark ? 1 : 0.5,
+                                fontSize: !isThemeDark ? 20 : 16,
+                                fontWeight: !isThemeDark ? 'bold' : 'normal'
+                            }
+                    ]}
+                    >
+                        {useText('light')}
+                    </Text>
+                    <Switch
+                        value={isThemeDark}
+                        onValueChange={toggleTheme}
+                        color={colors?.body?.switchTrack}
+                    />
+                    <Text style={
+                        [styles.themeText,
+                            {
+                                color: textColor,
+                                opacity: isThemeDark ? 1 : 0.5,
+                                fontSize: isThemeDark ? 20 : 16,
+                                fontWeight: isThemeDark ? 'bold' : 'normal'
+                            }
+                        ]
+                    }>
+                        {useText('dark')}
+                    </Text>
                 </View>
                 <View style={styles.languageContainer}>
                     {
@@ -35,7 +60,9 @@ const Settings: React.FC = () => {
                                             [styles.languageText,
                                                 {
                                                     color: textColor,
-                                                    fontWeight: item.code === language.code ? 'bold' : 'normal'
+                                                    fontWeight: item.code === language.code ? 'bold' : 'normal',
+                                                    fontSize: item.code === language.code ? 20 : 16,
+                                                    opacity: item.code === language.code ? 1 : 0.5
                                                 }
                                             ]
                                         }
@@ -78,6 +105,7 @@ const styles = StyleSheet.create({
     },
     languageContainer: {
         flexDirection: 'row',
+        alignItems: 'center'
     },
     languageText: {
         marginTop: 10,

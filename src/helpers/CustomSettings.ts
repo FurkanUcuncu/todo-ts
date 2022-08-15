@@ -27,12 +27,37 @@ const font = {
 
 const theme = {
     ...DefaultTheme,
-    version: 3,
+    version: 2,
     dark: true,
     colors: {
         ...DefaultTheme.colors,
         primary: '#17C3B2',
-        bgBody:'#fff'
+        header: {
+            bg: "white",
+            text: "#0000008a",
+        },
+        body: {
+            bg: "white",
+            title: "#1e1d1e",
+            text: "#0000008a",
+            unSelected: "#00000030",
+            switchBg: "white",
+            switchTrack: "#00000059",
+        },
+        todo: {
+            bg: "white",
+            text: "black",
+        },
+        shadow: {
+            shadowColor: "#000",
+            shadowOffset: {
+                width: 0,
+                height: 4,
+            },
+            shadowOpacity: 0.22,
+            shadowRadius: 2.42,
+            elevation: 4,
+        },
     },
     fonts: configureFonts(font),
 };

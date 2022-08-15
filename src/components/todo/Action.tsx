@@ -28,7 +28,7 @@ interface ActionProps {
 const Action = ({ x, deleteOpacity }: ActionProps) => {
     const size = cond(lessThan(x, HEIGHT), x, add(x, sub(x, HEIGHT)));
     const translateX = cond(lessThan(x, HEIGHT), 0, divide(sub(x, HEIGHT), 2));
-    const borderRadius = divide(size, 2);
+    const borderRadius = divide(size, 3);
     const scale = interpolateNode(size, {
         inputRange: [20, 30],
         outputRange: [0.01, 1],
