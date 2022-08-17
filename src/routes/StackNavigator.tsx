@@ -6,11 +6,11 @@ import { useTheme } from "react-native-paper";
 import Settings from "../screens/Settings";
 import {useText} from "../context/SettingsContext";
 
-type RootStackParamList = {
-    Home: undefined ;
-};
+// type RootStackParamList = {
+//     Home: undefined ;
+// };
 
-export type HomeScreen = DrawerNavigationProp<RootStackParamList, 'Home'>;
+// export type HomeScreen = DrawerNavigationProp<RootStackParamList, 'Home'>;
 
 const Drawer = createDrawerNavigator();
 
@@ -31,7 +31,6 @@ export const MainStackNavigator = () => {
                     drawerIcon: ({ color, size }) => (<MaterialCommunityIcons name="home-modern" size={size} color={color} />),
 
                 }}
-                // name={useText('home')}
                 name="Home"
                 component={Home}
             />
@@ -41,7 +40,6 @@ export const MainStackNavigator = () => {
                     drawerIcon: ({ color, size }) => (<MaterialCommunityIcons name="cog-outline" size={size} color={color} />),
 
                 }}
-                // name={useText('settings')}
                 name="Settings"
                 component={Settings}
             />

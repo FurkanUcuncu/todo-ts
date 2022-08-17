@@ -36,7 +36,7 @@ const Home: React.FC = () => {
                 <View style={[styles.bottomContainer,{...colors?.shadow}]}>
                     <TextInput
                         autoCorrect={false}
-                        style={[styles.input, { borderWidth:0, color:textColor, backgroundColor:colors?.todo?.bg}]}
+                        style={[styles.input, { color:textColor, backgroundColor:colors?.todo?.bg}]}
                         mode="flat"
                         underlineColor={colors?.body?.bg}
                         label={useText('addTodo')}
@@ -67,8 +67,8 @@ const styles = StyleSheet.create({
     input: {
         backgroundColor: '#fff',
         flex: 1,
-        // borderWidth:0,
-        // borderRadius: 20,
+        borderWidth:0,
+        borderRadius: 10,
         overflow:'hidden'
     },
     sendBtn: {

@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import {View, StyleSheet, Text, TouchableOpacity} from "react-native";
 import {useTheme, Switch} from 'react-native-paper';
-import {useAppDispatch, useAppSelector} from "../hooks/redux-hooks";
 import Layout from "../components/layout/Layout";
 import {SettingsContext, useText} from '../context/SettingsContext';
 
@@ -20,6 +19,7 @@ const Settings: React.FC = () => {
     return (
         <Layout headerText={useText('settings')}>
             <View style={styles.container}>
+                <Text style={[styles.title,{color:colors?.body?.title}]}>{useText('changeTheme')}</Text>
                 <View style={styles.row}>
                     <Text style={[styles.themeText,
                             {
@@ -50,6 +50,7 @@ const Settings: React.FC = () => {
                         {useText('dark')}
                     </Text>
                 </View>
+                <Text style={[styles.title,{color:colors?.body?.title}]}>{useText('changeLanguage')}</Text>
                 <View style={styles.languageContainer}>
                     {
                         data.map((item) => {
@@ -111,6 +112,11 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginHorizontal: 10,
     },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginVertical:10
+    }
 })
 
 export default Settings;

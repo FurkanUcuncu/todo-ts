@@ -7,6 +7,7 @@ import Animated, {
   clockRunning,
   cond,
   eq,
+  LightSpeedInRight,
   not,
   set,
   useCode,
@@ -75,7 +76,7 @@ const Item = ({ item, onSwipe, handleEditTodo }: ItemProps) => {
     [onSwipe]
   );
   return (
-    <Animated.View>
+    <Animated.View entering={LightSpeedInRight}>
       <View style={[styles.background,{backgroundColor:colors?.todo?.bg}]}>
         <TouchableWithoutFeedback onPress={() => shouldRemove.setValue(1)}>
           <Action x={abs(translateX)} {...{ deleteOpacity }} />
